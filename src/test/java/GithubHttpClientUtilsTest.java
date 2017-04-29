@@ -34,15 +34,15 @@ public class GithubHttpClientUtilsTest {
         }
     }
 
-    @Test
-    public void getCommitDetails(){
-        Commit commit1 = new Commit();
-        commit1.setUrl("https://api.github.com/repos/shrimanoz/TestProject/commits/a55c35e6b867502e9802b15a048681b4d1761958");
-        String testResult  = test.getCommitDetailsString(commit1);
-        System.out.println(
-                test.getStats(testResult)
-                        .toString());
-        System.out.println(testResult);
-    }
+//    @Test
+//    public void getCommitDetails(){
+//        Commit commit1 = new Commit();
+//        commit1.setUrl("https://api.github.com/repos/shrimanoz/TestProject/commits/a55c35e6b867502e9802b15a048681b4d1761958");
+//        String testResult  = test.getCommitDetailsString(commit1);
+//        System.out.println(
+//                test.getStats(testResult)
+//                        .toString());
+//        System.out.println(testResult);
+//    }
 
 }

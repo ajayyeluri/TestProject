@@ -8,5 +8,15 @@ import com.saimanoj.model.Stats;
  */
 public interface GithubStatService {
 
+    /**
+     * Save a commit stats
+     * @param stats
+     */
     public void saveCommitDetails(Stats stats);
+
+    /**
+     * Removes all purge details
+     */
+    public void purgeCommitDetails ();
+
 }

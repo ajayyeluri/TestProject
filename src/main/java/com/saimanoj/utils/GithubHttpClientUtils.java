@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.saimanoj.model.Commit;
 import com.saimanoj.model.Stats;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +42,7 @@ public class GithubHttpClientUtils {
         RepoName = repoName;
     }
 
+    Log logger = LogFactory.getLog(GithubHttpClientUtils.class);
     /**
      * Get a list of all commits for a repo
      * @param OwnerName
@@ -84,6 +87,7 @@ public class GithubHttpClientUtils {
     protected  Stats getStats(String commitDetail){
         ObjectMapper mapper = new ObjectMapper();
         Stats stats = new Stats();
+        logger.debug("recieved commit detail- "+commitDetail);
         try {
             JsonNode jsonNode = mapper.readTree(commitDetail);
             String sha=jsonNode.path("sha").asText();
@@ -100,7 +104,7 @@ public class GithubHttpClientUtils {
             stats.setTotal(total);
         }
         catch(Exception e){
-            e.printStackTrace();
+            logger.error("error coverting commit detail to Stats object " +commitDetail ,e);
         }
         return stats;
     }

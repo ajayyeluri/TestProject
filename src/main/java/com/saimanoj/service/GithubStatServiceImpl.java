@@ -17,4 +17,9 @@ public class GithubStatServiceImpl implements GithubStatService {
     public void saveCommitDetails(Stats stats) {
      statsRepository.save(stats);
     }
+
+    @Override
+    public void purgeCommitDetails() {
+        statsRepository.deleteAll();
+    }
 }
