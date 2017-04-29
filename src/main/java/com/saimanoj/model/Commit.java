@@ -7,7 +7,19 @@ import java.util.ArrayList;
  */
 public class Commit {
 
+    Stats stats;
+
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
+    }
+
     String sha, url ;
+
 
     public String getSha() {
         return sha;
