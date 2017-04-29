@@ -60,7 +60,7 @@ public class GithubHttpClientUtils {
         List<Commit> shaList =  clientUtils.getCommits(OwnerName , RepoName);
         Iterator<Commit> iterator = shaList.iterator();
         while(iterator.hasNext()) {
-            String url = "https://api.github.com/repos/" + OwnerName + "/" + RepoName + "/commits";
+            String url = "https://api.github.com/repos/" + OwnerName + "/" + RepoName + "/commits/";
             url = url + iterator.next().getSha();
             RestTemplate restTemplate = new RestTemplate();
             Stats stats = restTemplate
@@ -72,6 +72,10 @@ public class GithubHttpClientUtils {
             Date commitDate = stats.getCommitDate();
         }
        return null;
+    }
+    public Stats getDetail(Commit commit, String sha){
+       String url = commit.getUrl()+"/"+commit.getSha();
+        return null;
     }
 
    /* public Stats getCommitDetails(Commit commit){
