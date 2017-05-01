@@ -1,51 +1,78 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Hello AngularJS</title>
-    <link href="css/my-charts.css" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
     <style type="text/css">
-        [ng\:cloak], [ng-cloak], .ng-cloak {
-            display: none !important;
-        }
     </style>
+    <title></title>
+    <script type='text/javascript'>
+
+        'use strict';
+        angular.module("app", ["chart.js"])
+                .controller("DoughnutCtrl", function ($scope, $http) {
+                    $http.get("/chart/pie")
+                            .then(function(response) {
+                                $scope.pdata = response.data;
+                            });
+
+                    $scope.labels = ["Additions", "Deletions"];
+                    $scope.data = [300, 500];
+                }).controller("BarCtrl", function ($scope, $http) {
+                    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+                    $scope.series = ['Adds', 'Deletes'];
+
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40],
+                        [28, 48, 40, 19, 86, 27, 90]
+                    ];
+                });
+
+
+    </script>
+
 </head>
 
-<body ng-app="app">
+<body ng-app="app" >
 
-<div class="container">
+<form>
+    select a Chart
+    <select ng-model="myChart">
+        <!--<option value=""></option>-->
+        <option value="Bar" selected>Bar</option>
+        <option value="Pie">Pie</option>
 
-    <h1>Greeting</h1>
+    </select>
+</form>
 
-    <div ng-controller="home" ng-cloak class="ng-cloak">
-        <p>The ID is {{greeting.id}}</p>
-        <p>The content is {{greeting.content}}</p>
+<div ng-switch="myChart">
+
+    <div ng-switch-when="Pie" align="center" style="width:75%">
+
+        <div ng-controller="DoughnutCtrl">
+            <canvas id="doughnut" class="chart chart-doughnut"
+                    chart-data="data" chart-labels="labels">
+            </canvas>
+        </div>
     </div>
 
-    <h2>Pie Chart</h2>
-
-    <div ng-controller="PieCtrl" ng-cloak class="ng-cloak">
-
-        <canvas id="pie" class="chart chart-pie chart-xs" chart-data="data"
-                chart-labels="labels" chart-options="options"></canvas>
-
+    <div ng-switch-when="Bar" align="center" style="width:75%">
+        <div ng-controller="BarCtrl">
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"> chart-series="series"
+            </canvas>
+        </div>
     </div>
 
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js" type="text/javascript"></script>
-
-<script src="./js/my-charts.js" type="text/javascript"></script>
-<script src="./js/hello.js" type="text/javascript">
-
-</script>
-
-<script src="./js/controllers/pieChart.js" type="text/javascript"> </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
-
-<script src="./js/modules/charts-2.5.0.js/Chart.bundle.min.js" type="text/javascript">
-
-</script>
 
 </body>
+
 </html>
+
