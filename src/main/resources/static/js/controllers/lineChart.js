@@ -1,4 +1,4 @@
-angular.module("charts", ["chart.js"])
+angular.module("app", ["chart.js"])
     .controller("LineCtrl", function ($scope, $http) {
 
     $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
