@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/chart.js/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+    <style type="text/css">
+    </style>
+    <title></title>
+    <script type='text/javascript'>
+
+        'use strict';
+        angular.module("app", ["chart.js"])
+                .controller("DoughnutCtrl", function ($scope, $http) {
+                    $http.get("/chart/pie")
+                            .then(function(response) {
+                                $scope.pdata = response.data;
+                            });
+
+                    $scope.labels = ["Additions", "Deletions"];
+                    $scope.data = [300, 500];
+                });
+
+
+    </script>
+
+    <script type="text/javascript" >
+
+        'use strict';
+
+        angular.module("app", ["chart.js"])
+                .controller("BarCtrl", function ($scope, $http) {
+                    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+                    $scope.series = ['Adds', 'Deletes'];
+
+                    $scope.data = [
+                        [65, 59, 80, 81, 56, 55, 40],
+                        [28, 48, 40, 19, 86, 27, 90]
+                    ];
+                });
+
+    </script>
+
+
+</head>
+
+<body ng-app="app" >
+
+<form>
+    select a Chart
+    <select ng-model="myChart">
+        <!--<option value=""></option>-->
+        <option value="Bar" selected>Bar</option>
+        <option value="Pie">Pie</option>
+
+    </select>
+</form>
+
+<div ng-switch="myChart">
+
+    <div ng-switch-when="Pie" align="center" style="width:75%">
+        <div ng-controller="DoughnutCtrl">
+            <canvas id="doughnut" class="chart chart-doughnut"
+                    chart-data="data" chart-labels="labels">
+            </canvas>
+        </div>
+    </div>
+
+    <div ng-switch-when="Bar" align="center" style="width:75%">
+        <div ng-controller="BarCtrl">
+            <canvas id="bar" class="chart chart-bar"
+                    chart-data="data" chart-labels="labels"> chart-series="series"
+            </canvas>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
+
