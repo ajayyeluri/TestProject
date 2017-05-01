@@ -17,6 +17,16 @@ public class Stats {
     private int deletions;
     private int total;
     private Date date;
+    private String dateString ;
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
+
     private String url;
     private String repoName;
     private String repoOwner;

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 
 @RequestMapping("/chart")
@@ -32,6 +35,20 @@ public class SCMChartController {
             pieData.setDeletes(pieData.getDeletes() + stat.getDeletions());
         }
         return pieData;
+    }
+
+    @RequestMapping(path = "/bar",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Stats> getBarChartData() {
+
+        Iterable<Stats> stats = statsRepository.findAll();
+        List<Stats> statsList = new ArrayList<Stats>();
+        for ( Stats stat : stats) {
+            statsList.add(stat);
+        }
+        return statsList ;
+
     }
 
 }

@@ -102,6 +102,8 @@ public class GithubHttpClientUtils {
             stats.setAdditions(additions);
             stats.setDeletions(deletions);
             stats.setTotal(total);
+            stats.setDateString(commitDate);
+
         }
         catch(Exception e){
             logger.error("error coverting commit detail to Stats object " +commitDetail ,e);
