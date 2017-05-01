@@ -1,0 +1,13 @@
+<groups xmlns="http://www.isdc.ro/wro">
+    <group name="my-charts">
+        <css>webjar:bootstrap/3.2.0/less/bootstrap.less</css>
+        <css>file:${project.basedir}/src/main/wro/main.less</css>
+        <js>webjar:jquery/2.1.1/jquery.min.js</js>
+        <js>webjar:bootstrap/3.2.0/bootstrap.js</js>
+        <js>webjar:angularjs/1.4.10/angular.min.js</js>
+        <js>file:${project.basedir}/src/main/resources/static/controllers/*.js</js>
+        <js>file:${project.basedir}/src/main/resources/static/js/modules/angular-chart.js/angular-chart.js</js>
+        <js>file:${project.basedir}/src/main/resources/static/js/modules/charts-2.5.0.js/Chart.bundle.min.js</js>
+
+    </group>
+</groups>
