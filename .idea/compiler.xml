@@ -11,10 +11,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="github-dashboard" />
         <module name="githubdashboard" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="github-dashboard" target="1.6" />
       <module name="githubdashboard" target="1.6" />
     </bytecodeTargetLevel>
   </component>

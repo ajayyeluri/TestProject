@@ -18,11 +18,12 @@
                 .controller("DoughnutCtrl", function ($scope, $http) {
                     $http.get("/chart/pie")
                             .then(function(response) {
-                                $scope.pdata = response.data;
+//                                $scope.pdata = response.data;
+                                $scope.data = [response.data.adds, response.data.deletes];
                             });
 
                     $scope.labels = ["Additions", "Deletions"];
-                    $scope.data = [300, 500];
+//                    $scope.data = [0, 0];
                 }).controller("BarCtrl", function ($scope, $http) {
                     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
                     $scope.series = ['Adds', 'Deletes'];
