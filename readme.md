@@ -21,18 +21,18 @@ mvn spring-boot:run
 
 Ensure that the spring boot app is running ; then 
 
-curl http://localhost:8080/startprocessor/{repoName}/{repoOwner}/{since}
+curl http://localhost:8080/startprocessor/{repoOwner}/{repoName}/{since}
 
 or in a browser load the above URL 
-repoName: name of the gitbut repository 
-repoOwner : owner of the gitbut repository 
-since : Loads commit data since a given date. Format YYYY-MM-DD
+{repoName} : name of the gitbut repository 
+{repoOwner} : owner of the gitbut repository 
+{since} : Loads commit data since a given date. Format YYYY-MM-DD
 
 ex: http://localhost:8080/startprocessor/capitalone/hygieia/since=2017-01-01
 
 ## The Dashboard 
 
-open http://localhsot:8080 in a web browser ( preferably Chrome ) 
+open http://localhost:8080 in a web browser ( preferably Chrome ) 
 Select 'Bar' for Month by Month data 
 Select 'Pie' for total activity 
 
