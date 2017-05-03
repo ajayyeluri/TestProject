@@ -1,15 +1,8 @@
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.saimanoj.model.Commit;
 
-import com.saimanoj.model.Stats;
 import com.saimanoj.utils.GithubHttpClientUtils;
 import org.junit.Test;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
@@ -27,7 +20,7 @@ public class GithubHttpClientUtilsTest {
     @Test
     public void getCommitsTest(){
 
-        List<Commit> list =  test.getCommits("shrimanoz" , "TestProject");
+        List<Commit> list =  test.getCommits("shrimanoz" , "TestProject", null);
         for(int i=0;i<list.size();i++){
             Commit commit = list.get(i);
             System.out.println("The Url is :"+commit.getUrl()+" "+ "The Sha Value is :" +commit.getSha());

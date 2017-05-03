@@ -27,7 +27,7 @@
                     $scope.labels = ["Additions", "Deletions"];
 //                    $scope.data = [0, 0];
                 }).controller("BarCtrl", function ($scope, $http) {
-                    $http.get("/chart/bar")
+                    $http.get("/chart/bar/month")
                             .then (function(response){
                                 $scope.series = ['Adds', 'Deletes'];
                                 var bardata = response.data ;
@@ -35,10 +35,9 @@
                                 var adds =[] ;
                                 var deletes= [] ;
                                 for ( var i = 0 ; i < bardata.length ; i++){
-                                    labels[i]=bardata[i].dateString;
+                                    labels[i]=bardata[i].yearMonth;
                                     adds[i]=bardata[i].additions ;
                                     deletes[i]=bardata[i].deletions;
-
                                 }
                                 $scope.labels = labels;
                                 $scope.data = [adds,deletes];

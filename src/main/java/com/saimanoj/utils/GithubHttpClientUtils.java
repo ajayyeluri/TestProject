@@ -11,10 +11,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Class to call github api
@@ -47,13 +44,21 @@ public class GithubHttpClientUtils {
      * Get a list of all commits for a repo
      * @param OwnerName
      * @param RepoName
+     * @param commitApiParams
      * @return
      */
-    public List<Commit> getCommits(String OwnerName , String RepoName){
+    public List<Commit> getCommits(String OwnerName, String RepoName, Map<String, String> commitApiParams){
          this.OwnerName = OwnerName;
          this.RepoName = RepoName;
      // Build URL
         String url = "https://api.github.com/repos/"+OwnerName+"/"+RepoName+"/commits";
+        if (commitApiParams != null ) {
+            url+="?";
+            for ( String key: commitApiParams.keySet()){
+                url+=key+"="+commitApiParams.get(key)+"&";
+            }
+        }
+        logger.info("Calling URL " + url);
 
      //Get Json Data
         RestTemplate restTemplate = new RestTemplate();

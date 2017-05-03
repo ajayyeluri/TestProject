@@ -1,6 +1,7 @@
 package com.saimanoj.controller;
 
 
+import com.saimanoj.controller.dto.BarMonthData;
 import com.saimanoj.controller.dto.PieData;
 import com.saimanoj.model.Stats;
 import com.saimanoj.repository.StatsRepository;
@@ -11,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 
@@ -37,7 +37,7 @@ public class SCMChartController {
         return pieData;
     }
 
-    @RequestMapping(path = "/bar",
+    @RequestMapping(path = "/bar/day",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Stats> getBarChartData() {
@@ -51,4 +51,29 @@ public class SCMChartController {
 
     }
 
+
+    @RequestMapping(path = "/bar/month",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<BarMonthData> getBarMonthChartData() {
+
+        Iterable<Stats> stats = statsRepository.findAll();
+        Map<String, BarMonthData> yearMonth = new HashMap<String, BarMonthData>();
+        for ( Stats stat : stats) {
+            String[] dateString = stat.getDateString().split("-");
+            String currentDateString = dateString[0]+dateString[1];
+            BarMonthData barMonthData = new BarMonthData();
+            if (yearMonth.containsKey(currentDateString))
+                barMonthData = yearMonth.get(currentDateString);
+
+            barMonthData.addtoAdditions(stat.getAdditions());
+            barMonthData.addtoDeletions(stat.getDeletions());
+            barMonthData.setYearMonth(currentDateString);
+            yearMonth.put(currentDateString, barMonthData);
+
+        }
+
+        return yearMonth.values();
+
+    }
 }
